@@ -48,7 +48,7 @@ namespace Odd_Number_Iterator
         {
             if(index<0 || index>= Capacity())
             {
-                Console.WriteLine("Index is out of range.");
+               throw new IndexOutOfRangeException();
             }
             return arr[index];
         }
