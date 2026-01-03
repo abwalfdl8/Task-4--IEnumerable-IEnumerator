@@ -1,14 +1,31 @@
-﻿namespace Odd_Number_Iterator
+﻿using System.Collections;
+
+namespace Odd_Number_Iterator
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            MyList mylist = new MyList() {1,2,3,4,5,6,7,8,9,10};
+            MyList myList = new MyList();
+            myList.Add(1);
+            myList.Add(2);
+            myList.Add(3);
+            myList.Add(4);
+            myList.Add(5);
+            myList.Add(6);
 
-            foreach (int n in mylist)
+            //IEnumerator enumerator = myList.GetEnumerator();
+
+            //while(enumerator.MoveNext())
+            //{
+            //   int OddNumber= (int)enumerator.Current;
+            //    Console.WriteLine(OddNumber);
+            //}
+
+
+            foreach (int OddNumber in myList)
             {
-              Console.WriteLine(n);
+                Console.WriteLine(OddNumber);
             }
 
 

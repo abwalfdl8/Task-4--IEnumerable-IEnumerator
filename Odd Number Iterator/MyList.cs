@@ -8,11 +8,11 @@ namespace Odd_Number_Iterator
     internal class MyList :IEnumerable
     {
         int[] arr;
-        int CurrentIndex;
+        int LastIndex;
         public MyList()
         {
             arr = new int[5];
-            CurrentIndex = -1;
+            LastIndex = -1;
         }
 
         public int Capacity()
@@ -22,16 +22,16 @@ namespace Odd_Number_Iterator
 
         public int Count()
         {
-            return CurrentIndex + 1;
+            return LastIndex + 1;
         }
 
         public void Add(int Num)
         {
-           if(CurrentIndex == arr.Length-1) 
+           if(LastIndex == arr.Length-1) 
            {
              Extend();
            }
-            arr[++CurrentIndex] = Num;
+            arr[++LastIndex] = Num;
         }
         private void Extend()
         {
@@ -46,7 +46,7 @@ namespace Odd_Number_Iterator
 
         public int GetByIndex(int index)
         {
-            if(index<0 || index>= Capacity())
+            if(index<0 || index >= Capacity())
             {
                throw new IndexOutOfRangeException();
             }
@@ -61,26 +61,18 @@ namespace Odd_Number_Iterator
         class Iterator : IEnumerator
         {
             MyList mylist;
-            int index;
+            int CurrentIndex;
             public Iterator(MyList mylist)
             {
                this.mylist = mylist;
-                index = -1;
+                CurrentIndex = -1;
             }
 
-            public object Current
-            {
-                get
-                {
-                    return mylist.arr[index];
-                }
-            }
             public bool MoveNext()
             {
-              
-               while(++index <= mylist.CurrentIndex)
+               while(++ CurrentIndex < mylist.LastIndex)
                 {
-                    if(mylist.arr[index]%2 != 0)
+                    if(mylist.arr[CurrentIndex]%2 != 0)
                     {
                         return true;
                     }
@@ -88,9 +80,17 @@ namespace Odd_Number_Iterator
                 return false;
             }
 
+
+            public object Current
+            {
+                get
+                {
+                    return mylist.arr[CurrentIndex];
+                }
+            }
             public void Reset()
             {
-                index = -1;
+                CurrentIndex = -1;
             }
 
 
